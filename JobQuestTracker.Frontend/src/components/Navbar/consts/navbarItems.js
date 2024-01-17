@@ -8,9 +8,9 @@ import DnsIcon from '@mui/icons-material/Dns';
 export const mainNavbarItems = [
     {
         id: 0,
-        icon: <PeopleIcon />,
-        label: 'Authentication',
-        route: 'authentication',
+        icon: <ImageIcon />,
+        label: 'Processes',
+        route: 'Processes',
     },
     {
         id: 1,
@@ -20,9 +20,9 @@ export const mainNavbarItems = [
     },
     {
         id: 2,
-        icon: <ImageIcon />,
-        label: 'Storage',
-        route: 'storage',
+        icon: <PeopleIcon />,
+        label: 'Authentication',
+        route: 'authentication',
     },
     {
         id: 3,

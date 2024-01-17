@@ -13,7 +13,7 @@ import MachineLearning from './pages/MachineLearning/MachineLearning';
 import Hosting from './pages/Hosting/Hosting';
 import Functions from './pages/Functions/Functions';
 import Database from './pages/Database/Database';
-import Storage from './pages/Storage/Storage';
+import Processes from './pages/Processes/Processes';
 import { ThemeProvider } from '@mui/material/styles';
 import { dashboardTheme } from './dashboardTheme';
 
@@ -21,13 +21,13 @@ ReactDOM.render(
   <ThemeProvider theme={dashboardTheme}>
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}>
+    <Route path="/" element={<App />}>
+        <Route index element={<Processes />} />
         <Route path="authentication" element={<Authentication />} />
         <Route path="database" element={<Database />} />
         <Route path="functions" element={<Functions />} />
         <Route path="hosting" element={<Hosting />} />
-        <Route path="machine-learning" element={<MachineLearning />} />
-        <Route path="storage" element={<Storage />} />
+        <Route path="machine-learning" element={<MachineLearning />} />    
       </Route>
     </Routes>
   </BrowserRouter>
