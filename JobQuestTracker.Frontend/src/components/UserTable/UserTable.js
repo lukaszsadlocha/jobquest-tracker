@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react'
 import DataTable from '../common/DataTable/DataTable';
 
 const columns = [
-    { field: 'id', headerName: 'User ID', width: 150 },
-    { field: 'name', headerName: 'Name', width: 150 },
-    { field: 'username', headerName: 'Username', width: 150 },
-    { field: 'email', headerName: 'E-mail', width: 200 },
+    { field: 'id', headerName: 'ID', width: 150 },
+    { field: 'companyName', headerName: 'Company', width: 150 },
+    { field: 'companyLocation', headerName: 'Location', width: 150 },
+    { field: 'contactPerson', headerName: 'Contact person', width: 150 },
+    { field: 'contractType', headerName: 'Contract Type', width: 150 },
+    { field: 'rate', headerName: 'Rate', width: 150 },
+    { field: 'workOfficeType', headerName: 'Type', width: 150 },
+    { field: 'status', headerName: 'Status', width: 150 }
 ];
 
 const userTableStyles = {
@@ -16,7 +20,7 @@ const UserTable = ({ onError }) => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
+        fetch('http://localhost:5045/recruitmentProcesses')
             .then((response) => response.json())
             .then((json) => setUsers(json))
             .catch(() => onError())
