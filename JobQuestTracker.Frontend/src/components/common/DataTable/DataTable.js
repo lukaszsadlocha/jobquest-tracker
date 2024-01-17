@@ -7,7 +7,7 @@ const DataTable = ({
     loading,
     sx
 }) => {
-    const [pageSize, setPageSize] = useState(2);
+    const [pageSize, setPageSize] = useState(10);
 
     return (
         <DataGrid 
@@ -19,7 +19,7 @@ const DataTable = ({
             pagination
             pageSize={pageSize}
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-            rowsPerPageOptions={[2, 5, 10]}
+            rowsPerPageOptions={[10, 50, 100]}
         />
     );
 };
