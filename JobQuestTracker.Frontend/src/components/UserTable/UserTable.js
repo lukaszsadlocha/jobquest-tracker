@@ -20,7 +20,7 @@ const UserTable = ({ onError }) => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5045/recruitmentProcesses')
+        fetch('https://localhost:7103/recruitmentProcesses')
             .then((response) => response.json())
             .then((json) => setUsers(json))
             .catch(() => onError())

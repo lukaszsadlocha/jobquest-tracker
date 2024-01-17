@@ -28,6 +28,7 @@ ReactDOM.render(
         <Route path="functions" element={<Functions />} />
         <Route path="hosting" element={<Hosting />} />
         <Route path="machine-learning" element={<MachineLearning />} />    
+        <Route path="processes" element={<Processes />} />    
       </Route>
     </Routes>
   </BrowserRouter>
