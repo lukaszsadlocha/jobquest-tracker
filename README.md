@@ -14,5 +14,14 @@ Check how ChatGPT can help me with writing .NET code
 There will be a chrome plugin that can scrap DM from LinkedId
 
 
+# TODO - plan
+- [x] Setup FrontEnd (React & MaterialUI)
+- [ ] Setup dummy Api
+- [ ] Setup deployment to Azure
+- [ ] Add Meetings
+- [ ] Add Google Auth
+- [ ] Split Company and R.Process
 
-
+# TODO - backlog
+- [ ] Drag and drop attachement & save it to blob or document DB
+- [ ] Add Recrutiment Cycle (and group Recruitment processes)
