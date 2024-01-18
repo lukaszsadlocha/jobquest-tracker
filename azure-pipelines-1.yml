@@ -51,7 +51,7 @@ steps:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend/build' 
     includeRootFolder: false 
     archiveType: zip 
-    archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)Archive1.zip 
+    archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)Archive.zip 
     replaceExistingArchive: true
 
 - task: CmdLine@2
@@ -68,5 +68,5 @@ steps:
     azureSubscription: 'PlaygroundSubscription (e39b505e-2176-471d-b5a0-62d117076d8a)'
     appType: 'webAppLinux'
     WebAppName: 'JobQuestTracker'
-    packageForLinux: '$(System.DefaultWorkingDirectory/JobQuestTracker.Frontend/$(Build.BuildId).zip'
+    packageForLinux: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)Archive.zip
 
