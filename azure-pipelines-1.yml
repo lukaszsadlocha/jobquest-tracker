@@ -21,7 +21,6 @@ steps:
       echo  '$(System.DefaultWorkingDirectory)'
       dir
 
-
 - task: CmdLine@2
   inputs:
     script: |
@@ -29,3 +28,21 @@ steps:
       npm run build
     workingDirectory: 'JobQuestTracker.Frontend'
   displayName: 'npm install and build'
+
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo  '$(System.DefaultWorkingDirectory)'
+      dir
+    workingDirectory: JobQuestTracker.Frontend
+  displayName: list what is in Frontend folder after build
+
+
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'PlaygroundSubscription (e39b505e-2176-471d-b5a0-62d117076d8a)'
+    appType: 'webAppLinux'
+    WebAppName: 'JobQuestTracker'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
