@@ -18,17 +18,17 @@ steps:
 - script: |
     npm install
   displayName: 'npm install'
-  workingDirectory: $(System.DefaultWorkingDirectory)'/JobQuestTracker.Frontend
+  workingDirectory: $(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend
 
 - script: |
     npm run build
   displayName: 'npm build'
-  workingDirectory: $(System.DefaultWorkingDirectory)'/JobQuestTracker.Frontend
+  workingDirectory: $(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend
 
 - task: CopyFiles@2
   inputs:
-    Contents: $(System.DefaultWorkingDirectory)'/JobQuestTracker.Frontend/build/** # Pull the build directory (React)
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    Contents: $(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend/build/** # Pull the build directory (React)
+    TargetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   inputs: 
