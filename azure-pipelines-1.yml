@@ -20,7 +20,6 @@ steps:
     script: |
       echo  '$(System.DefaultWorkingDirectory)'
       dir
-      dir subfoldername
 
 
 - task: CmdLine@2
