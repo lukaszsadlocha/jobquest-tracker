@@ -45,10 +45,19 @@ steps:
     workingDirectory: JobQuestTracker.Frontend/build
   displayName: list what is build
 
+- task: ArchiveFiles@2 
+  displayName: 'Archive files' 
+  inputs: 
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend' 
+    includeRootFolder: false 
+    archiveType: zip 
+    archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)Archive1.zip 
+    replaceExistingArchive: true
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory/JobQuestTracker.Frontend/build'
-    includeRootFolder: true
+    includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(System.DefaultWorkingDirectory/JobQuestTracker.Frontend/$(Build.BuildId).zip'
     replaceExistingArchive: true
