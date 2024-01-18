@@ -37,6 +37,14 @@ steps:
     workingDirectory: JobQuestTracker.Frontend
   displayName: list what is in Frontend folder after build
 
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo  '$(System.DefaultWorkingDirectory)'
+      dir
+    workingDirectory: JobQuestTracker.Frontend/build
+  displayName: list what is build
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.BinariesDirectory)/JobQuestTracker.Frontend/build'
@@ -52,3 +60,4 @@ steps:
     appType: 'webAppLinux'
     WebAppName: 'JobQuestTracker'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+
