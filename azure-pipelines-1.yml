@@ -54,6 +54,15 @@ steps:
     archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)Archive.zip 
     replaceExistingArchive: true
 
+- task: ArchiveFiles@2 
+  displayName: 'Archive files 2' 
+  inputs: 
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend/build' 
+    includeRootFolder: false 
+    archiveType: zip 
+    archiveFile: $(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend/$(Build.BuildId)Archive.zip 
+    replaceExistingArchive: true
+
 - task: CmdLine@2
   inputs:
     script: |
