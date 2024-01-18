@@ -4,72 +4,36 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+- release
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
+- task: UseNode@1
   inputs:
-    versionSpec: '20.x'
+    version: '20.x'
   displayName: 'Install Node.js'
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo  '$(System.DefaultWorkingDirectory)'
-      dir
+- script: |
+    npm install
+  displayName: 'npm install'
+  workingDirectory: $(System.DefaultWorkingDirectory)'/JobQuestTracker.Frontend
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      npm install
-      npm run build
-    workingDirectory: 'JobQuestTracker.Frontend'
-  displayName: 'npm install and build'
+- script: |
+    npm run build
+  displayName: 'npm build'
+  workingDirectory: $(System.DefaultWorkingDirectory)'/JobQuestTracker.Frontend
 
-- task: CmdLine@2
+- task: CopyFiles@2
   inputs:
-    script: |
-      echo  '$(System.DefaultWorkingDirectory)'
-      dir
-    workingDirectory: JobQuestTracker.Frontend
-  displayName: list what is in Frontend folder after build
+    Contents: $(System.DefaultWorkingDirectory)'/JobQuestTracker.Frontend/build/** # Pull the build directory (React)
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo  '$(System.DefaultWorkingDirectory)'
-      dir
-    workingDirectory: JobQuestTracker.Frontend/build
-  displayName: list what is build
-
-- task: ArchiveFiles@2 
-  displayName: 'Archive files' 
+- task: PublishBuildArtifacts@1
   inputs: 
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend/build' 
-    includeRootFolder: false 
-    archiveType: zip 
-    archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)Archive.zip 
-    replaceExistingArchive: true
-
-- task: ArchiveFiles@2 
-  displayName: 'Archive files 2' 
-  inputs: 
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend/build' 
-    includeRootFolder: false 
-    archiveType: zip 
-    archiveFile: $(System.DefaultWorkingDirectory)/JobQuestTracker.Frontend/$(Build.BuildId)Archive.zip 
-    replaceExistingArchive: true
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo  '$(System.DefaultWorkingDirectory)'
-      dir
-    workingDirectory: JobQuestTracker.Frontend
-  displayName: list what is in Frontend folder after build
+    PathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
+    ArtifactName: 'www' # output artifact named www
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -77,5 +41,7 @@ steps:
     azureSubscription: 'PlaygroundSubscription (e39b505e-2176-471d-b5a0-62d117076d8a)'
     appType: 'webAppLinux'
     WebAppName: 'JobQuestTracker'
-    packageForLinux: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)Archive.zip
-
+    deployToSlotOrASE: true
+    ResourceGroupName: 'JobQuestTracker-ResourceGroup'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
