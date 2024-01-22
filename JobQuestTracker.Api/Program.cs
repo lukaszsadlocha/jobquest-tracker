@@ -46,12 +46,20 @@ app.UseHttpsRedirection();
 
 var recruitments = new List<RecruitmentProcessModel>()
 {
-    new(1, "Smart Solutions", "Kraków", "Adam Bodnar",  ContractType.B2B, 150, WorkOfficeType.Onsite, RecruitmentProcessStatus.Initiated),
-    new(2, "Good Designs", "London", "Amul Recruting", ContractType.B2B, 180, WorkOfficeType.Remote, RecruitmentProcessStatus.Initiated),
-    new(3, "Ninjas .NET", "Berlin", "Herring Muller", ContractType.B2B, 200, WorkOfficeType.Remote, RecruitmentProcessStatus.FoundBetterMatch),
-    new(4, "Swedish Devs", "Stockholm", "Mikkel Nikke", ContractType.B2B, 180, WorkOfficeType.Onsite, RecruitmentProcessStatus.Cancelled),
-    new(5, "Allegro", "Warsaw", "Anna Dymna", ContractType.EmploymentContract, 21000, WorkOfficeType.Hubrid, RecruitmentProcessStatus.IResigned),
-    new(6, "SAP consultants", "Hans Zimernam", "Katowice", ContractType.EmploymentContract, 19000, WorkOfficeType.Remote, RecruitmentProcessStatus.SucceededButIResign)
+    new(1, "Tech lead", "Smart Solutions", "Kraków", "Adam Bodnar",  ContractType.B2B, 150, WorkOfficeType.Onsite, RecruitmentProcessStatus.Initiated)
+    {
+        Meetings = new List<MeetingModel>()
+        {
+            new(1, 1, "Adam Bodnar", "All was nice - I liked it"),
+            new(2, 1, "Elon Musk", "Tech interview - went really nice"),
+            new(3, 1, "Bill gates", "CEO interview - very nice")
+        }
+    },
+    new(2, ".NET dev", "Good Designs", "London", "Amul Recruting", ContractType.B2B, 180, WorkOfficeType.Remote, RecruitmentProcessStatus.Initiated),
+    new(3, "Senior Developer" ,"Ninjas .NET", "Berlin", "Herring Muller", ContractType.B2B, 200, WorkOfficeType.Remote, RecruitmentProcessStatus.FoundBetterMatch),
+    new(4, "Specialist", "Swedish Devs", "Stockholm", "Mikkel Nikke", ContractType.B2B, 180, WorkOfficeType.Onsite, RecruitmentProcessStatus.Cancelled),
+    new(5, "Team lead", "Allegro", "Warsaw", "Anna Dymna", ContractType.EmploymentContract, 21000, WorkOfficeType.Hubrid, RecruitmentProcessStatus.IResigned),
+    new(6, "Sap Consultant","SAP consultants", "Hans Zimernam", "Katowice", ContractType.EmploymentContract, 19000, WorkOfficeType.Remote, RecruitmentProcessStatus.SucceededButIResign)
 };
 
 app.MapGet("/recruitmentProcesses", () =>

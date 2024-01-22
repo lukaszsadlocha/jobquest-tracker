@@ -5,13 +5,14 @@ var url = config.url.API_URL
 
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 150 },
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'position', headerName: 'Position', width: 150 },
     { field: 'companyName', headerName: 'Company', width: 150 },
     { field: 'companyLocation', headerName: 'Location', width: 150 },
     { field: 'contactPerson', headerName: 'Contact person', width: 150 },
     { field: 'contractType', headerName: 'Contract Type', width: 150 },
-    { field: 'rate', headerName: 'Rate', width: 150 },
-    { field: 'workOfficeType', headerName: 'Type', width: 150 },
+    { field: 'rate', headerName: 'Rate', width: 130 },
+    { field: 'workOfficeType', headerName: 'Type', width: 130 },
     { field: 'status', headerName: 'Status', width: 150 }
 ];
 
