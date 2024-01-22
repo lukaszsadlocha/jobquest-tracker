@@ -1,7 +1,7 @@
 // Constants.js
 const prod = {
     url: {
-        API_URL: 'https://api.jobquesttracker.azurewebsites.net',
+        API_URL: 'https://jobquesttracker-api.azurewebsites.net',
     }
 };
 const dev = {
