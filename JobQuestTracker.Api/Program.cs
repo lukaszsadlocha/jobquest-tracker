@@ -17,12 +17,18 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
+var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrl");
+if(frontendUrl == null)
+{
+    throw new Exception("Frontend Url is not set");
+}
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("https://localhost:3000");
+            policy.WithOrigins(frontendUrl!);
         });
 });
 

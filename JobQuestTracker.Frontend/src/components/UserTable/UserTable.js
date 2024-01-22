@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import DataTable from '../common/DataTable/DataTable';
+import { config } from '../../constants'
+var url = config.url.API_URL
+
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 150 },
@@ -20,7 +23,7 @@ const UserTable = ({ onError }) => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('https://localhost:7103/recruitmentProcesses')
+        fetch(url+'/recruitmentProcesses')
             .then((response) => response.json())
             .then((json) => setUsers(json))
             .catch(() => onError())

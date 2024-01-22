@@ -17,7 +17,8 @@ There will be a chrome plugin that can scrap DM from LinkedId
 # TODO - plan
 - [x] Setup FrontEnd (React & MaterialUI)
 - [x] Setup dummy Api
-- [ ] Frontend on https
+- [x] Frontend on https
+- [ ] Setup dev & prod variables for both Dev and Prod (cros etc)
 - [ ] Setup deployment to Azure
 - [ ] Add Meetings
 - [ ] Add Google Auth
@@ -30,3 +31,4 @@ There will be a chrome plugin that can scrap DM from LinkedId
 
 ## Tricks & Things to remember
 - To run local React Frontend: `set HTTPS=true&&npm start`
+- Azure always free services https://azure.microsoft.com/en-us/pricing/free-services/
