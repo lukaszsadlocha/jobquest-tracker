@@ -1,30 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import GridWrapper from '../../components/common/GridWrapper/GridWrapper'
-import BasicSnackbar from '../../components/common/BasicSnackbar/BasicSnackbar';
-import BasicCard from '../../components/common/BasicCard/BasicCard';
-import CollapsibleTable from '../../components/CollapsibleTable/CollapsibleTable';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import FormDialog from '../../components/FormDialogs/FormDialogs';
-
+import AddFormDialogButton from '../../components/AddFormDialogButton/AddFormDialogButton';
+import RecruitmentProcessesTable from '../../components/RecruitmentProcessesTable/RecruitmentProcessesTable'
+import { config } from '../../constants'
 
 
 const Processes = () => {
 
-    return (
-        <GridWrapper>
-        <CollapsibleTable></CollapsibleTable>
+const onProcessAdded = () => {
+  console.log("I am in Processes")
+}
 
-        <Stack spacing={2}>
-        {/* <Button variant="contained" onClick={handleAddClick}>Add</Button> */}
 
-        <FormDialog></FormDialog>
-        
-        </Stack>
-        
-        
-      </GridWrapper>
-    )
+  return (
+    <GridWrapper>
+      <RecruitmentProcessesTable apiUrl={config.url}></RecruitmentProcessesTable>
+      <Stack spacing={2}>
+        <AddFormDialogButton onProcessAdded={onProcessAdded}></AddFormDialogButton>
+      </Stack>
+    </GridWrapper>
+  )
 }
 
 export default Processes

@@ -1,10 +1,11 @@
 import React from 'react'
+import GridWrapper from '../../components/common/GridWrapper/GridWrapper'
 
 const Hosting = () => {
     return (
-        <div style={{marginLeft: '500px'}}>
-            This is hosting page.
-        </div>
+        <GridWrapper>
+            Hosting
+        </GridWrapper>
     )
 }
 

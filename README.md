@@ -21,7 +21,7 @@ There will be a chrome plugin that can scrap DM from LinkedId
 - [x] Setup dev & prod variables for both Dev and Prod (cros etc)
 - [x] Setup deployment to Azure
 - [x] Add Meetings to models
-- [ ] *  Add Form to add/edit Recruitment Process
+- [ ] *  Add Form to add/edit/view Recruitment Process
 - [ ] Add Google Auth
 - [ ] Split Company and R.Process
 

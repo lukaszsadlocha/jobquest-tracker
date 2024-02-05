@@ -1,5 +1,7 @@
 using JobQuestTracker.Api;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json.Serialization;
+using System.Xml.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,23 +19,24 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
+
 var frontendUrl = builder.Configuration.GetValue<string>("FrontendUrl");
-if(frontendUrl == null)
+if (frontendUrl == null)
 {
     throw new Exception("Frontend Url is not set");
 }
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-        policy =>
-        {
-            policy.WithOrigins(frontendUrl!);
-        });
+    options.AddPolicy("CorsPolicy",
+        builder =>
+        builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 });
 
 var app = builder.Build();
-app.UseCors();
+app.UseCors("CorsPolicy");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -48,11 +51,12 @@ var recruitments = new List<RecruitmentProcessModel>()
 {
     new(1, "Tech lead", "Smart Solutions", "Kraków", "Adam Bodnar",  ContractType.B2B, 150, WorkOfficeType.Onsite, RecruitmentProcessStatus.Initiated)
     {
-        Meetings = new List<MeetingModel>()
+        Events = new List<RecruitmentEventModel>()
         {
-            new(1, 1, "Adam Bodnar", "All was nice - I liked it"),
-            new(2, 1, "Elon Musk", "Tech interview - went really nice"),
-            new(3, 1, "Bill gates", "CEO interview - very nice")
+            new(1, 1, RecruitmentEventType.SubmitApplicationViaLinkedIn, "-", "Sent my Application"),
+            new(2, 1, RecruitmentEventType.CallWithRecruiter, "Adam Bodnar",   "All was nice - I liked it"),
+            new(3, 1, RecruitmentEventType.TechInterview, "Elon Musk", "Tech interview - went really nice"),
+            new(4, 1, RecruitmentEventType.SoftSkillInterview, "Bill gates", "CEO interview - very nice")
         }
     },
     new(2, ".NET dev", "Good Designs", "London", "Amul Recruting", ContractType.B2B, 180, WorkOfficeType.Remote, RecruitmentProcessStatus.Initiated),
@@ -66,8 +70,95 @@ app.MapGet("/recruitmentProcesses", () =>
 {
     return recruitments;
 })
-.WithName("GetRecruitmentProcesses")
-.WithOpenApi();
+.WithName("GetRecruitmentProcesses").WithOpenApi();
+
+app.MapPost("/recruitmentProcesses", (RecruitmentProcessAddModel model) =>
+{
+if (model.CompanyName == "")
+{
+    return Results.BadRequest();
+}
+
+    var newId = recruitments.Max(x => x.Id) + 1;
+    var newProcess = new RecruitmentProcessModel(
+        newId,
+        model.Position,
+        model.CompanyName,
+        model.CompanyLocation,
+        model.ContactPerson,
+        ContractType.B2B,
+        model.Rate,
+        WorkOfficeType.Onsite,
+        RecruitmentProcessStatus.Initiated);
+    
+    recruitments.Add(newProcess);
+
+
+    return Results.Ok(newProcess);
+
+});
+
+//Edit
+app.MapPut("/recruitmentProcesses/{processID}", (RecruitmentProcessUpdateModel model, [FromRoute] int processID) =>
+{
+    var index = recruitments.FindIndex(x => x.Id == processID);
+    if (index < 0)
+    {
+        return Results.NotFound();
+    }
+    var process = recruitments[index];
+    var newProcess = process with { 
+        Position = model.Position,  
+        CompanyName = model.CompanyName,
+        CompanyLocation = model.CompanyLocation,
+        ContactPerson = model.ContactPerson,
+        Rate = model.Rate,
+    };
+    recruitments[index] = newProcess;
+
+    return Results.Ok(newProcess);
+
+});
+
+app.MapDelete("/recruitmentProcesses/{processID}", ([FromRoute] int processID) =>
+{
+    if (processID == 0)
+    {
+        return Results.BadRequest();
+    }
+    var recruitmentToRemove = recruitments.FirstOrDefault(x => x.Id == processID);
+    if(recruitmentToRemove == null)
+    {
+        return Results.BadRequest();
+    }
+    recruitments.Remove(recruitmentToRemove);
+
+    return Results.Ok(processID);
+
+});
+
+app.MapGet("/metadata/ContractTypes", () =>
+{
+    return Enum.GetValues<ContractType>().Select(x => new { id = (int)x, label = x, value = x }).ToArray();
+
+});
+app.MapGet("/metadata/RecruitmentEventTypes", () =>
+{
+    return Enum.GetValues<RecruitmentEventType>().Select(x => new { id = (int)x, label = x, value = x }).ToArray();
+
+});
+app.MapGet("/metadata/RecruitmentProcessStatuses", () =>
+{
+    return Enum.GetValues<RecruitmentProcessStatus>().Select(x => new { id = (int)x, label = x, value = x }).ToArray();
+
+});
+app.MapGet("/metadata/WorkOfficeTypes", () =>
+{
+    return Enum.GetValues<WorkOfficeType>().Select(x => new { id = (int)x, label = x, value = x }).ToArray();
+
+});
+
+
 
 app.Run();
 

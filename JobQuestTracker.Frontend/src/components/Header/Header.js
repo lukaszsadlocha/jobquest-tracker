@@ -1,6 +1,5 @@
 import React from 'react'
 import CommonButton from '../common/CommonButton/CommonButton'
-import NotificationBell from '../common/NotificationBell/NotificationBell'
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -19,9 +18,6 @@ const Header = ({ title }) => {
                 >
                     Go to docs
                 </Typography>
-                <NotificationBell
-                    iconColor="white"
-                />
                 <Avatar src="https://mui.com/static/images/avatar/1.jpg" />
             </Box>
             <Box sx={headerStyles.middleRow}>
