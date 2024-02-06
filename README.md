@@ -29,6 +29,8 @@ There will be a chrome plugin that can scrap DM from LinkedId
       (fix buttons positions and style on each form)
       (make each form of the same size)
       (Make table header bolded)
+      (add apis for edit/delete events)
+    
 - [ ] Prepare Mappings for dropdowns (nice names with spaces)
 - [ ] Add Google Auth
 - [ ] Add Persistent storage (CosmosDB, AzureSQL, Redis?)

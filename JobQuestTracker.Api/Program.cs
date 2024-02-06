@@ -62,7 +62,7 @@ var recruitments = new List<RecruitmentProcessModel>()
     new(2, ".NET dev", "Good Designs", "London", "Amul Recruting", ContractType.B2B, 180, WorkOfficeType.Remote, RecruitmentProcessStatus.Initiated),
     new(3, "Senior Developer" ,"Ninjas .NET", "Berlin", "Herring Muller", ContractType.B2B, 200, WorkOfficeType.Remote, RecruitmentProcessStatus.FoundBetterMatch),
     new(4, "Specialist", "Swedish Devs", "Stockholm", "Mikkel Nikke", ContractType.B2B, 180, WorkOfficeType.Onsite, RecruitmentProcessStatus.Cancelled),
-    new(5, "Team lead", "Allegro", "Warsaw", "Anna Dymna", ContractType.EmploymentContract, 21000, WorkOfficeType.Hubrid, RecruitmentProcessStatus.IResigned),
+    new(5, "Team lead", "Allegro", "Warsaw", "Anna Dymna", ContractType.EmploymentContract, 21000, WorkOfficeType.Hybrid, RecruitmentProcessStatus.IResigned),
     new(6, "Sap Consultant","SAP consultants", "Hans Zimernam", "Katowice", ContractType.EmploymentContract, 19000, WorkOfficeType.Remote, RecruitmentProcessStatus.SucceededButIResign)
 };
 

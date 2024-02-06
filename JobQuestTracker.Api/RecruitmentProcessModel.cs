@@ -57,7 +57,7 @@
     public enum WorkOfficeType
     {
         Onsite,
-        Hubrid,
+        Hybrid,
         Remote
     }
 }
