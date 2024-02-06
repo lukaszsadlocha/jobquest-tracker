@@ -20,14 +20,24 @@ There will be a chrome plugin that can scrap DM from LinkedId
 - [x] Frontend on https
 - [x] Setup dev & prod variables for both Dev and Prod (cros etc)
 - [x] Setup deployment to Azure
-- [x] Add Meetings to models
-- [ ] *  Add Form to add/edit/view Recruitment Process
+- [x] Add Evens to models
+- [ ] * Add Form to add/edit/view Recruitment Process & Events
+      (Make nice view forms (text field disabled)?
+      (improve edit froms (get correct inputs for dropdown)
+      (reload table data after all actions - including adding new Process)
+      (add button to add event for exising process)
+      (fix buttons positions and style on each form)
+      (make each form of the same size)
+      (Make table header bolded)
+- [ ] Prepare Mappings for dropdowns (nice names with spaces)
 - [ ] Add Google Auth
-- [ ] Split Company and R.Process
+- [ ] Add Persistent storage (CosmosDB, AzureSQL, Redis?)
+- [ ] Conditional formatting to pritify the table
 
 # TODO - backlog
 - [ ] Drag and drop attachement & save it to blob or document DB
 - [ ] Add Recrutiment Cycle (and group Recruitment processes)
+- [ ] (consider) Split Company and R.Process
 
 
 ## Tricks & Things to remember
